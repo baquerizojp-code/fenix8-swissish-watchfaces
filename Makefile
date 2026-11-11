@@ -34,7 +34,7 @@ generate-key:
 		echo "Developer key already exists at $(KEY)"; \
 	else \
 		mkdir -p $(HOME)/.garmin && \
-		openssl genpkey -algorithm RSA -out "$(KEY)" -pkeyopt rsa_keygen_bits:4096 && \
+		openssl genpkey -algorithm RSA -outform DER -out "$(KEY)" -pkeyopt rsa_keygen_bits:4096 && \
 		echo "Generated 4096-bit developer key at $(KEY)"; \
 	fi
 
