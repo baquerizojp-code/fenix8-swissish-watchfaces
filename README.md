@@ -6,6 +6,24 @@ Includes the **Rolex Submariner Date** (5 selectable styles) and the **Rolex Cos
 
 ---
 
+## Supported Watches
+
+Each `.prg` is compiled for one Connect IQ device. Pick the `DEVICE` that matches your watch:
+
+| Your watch | `DEVICE` | Status |
+|---|---|---|
+| fēnix 8 AMOLED 47mm / 51mm, tactix 8 (AMOLED), quatix 8 | `fenix847mm` (default) | Tested on a real watch |
+| fēnix 8 Pro 47mm / 51mm (AMOLED & MicroLED), quatix 8 Pro | `fenix8pro47mm` | Compiles; same 454×454 screen, not yet tested on a real watch |
+| fēnix 8 43mm, fēnix 8 Solar, Enduro 3 | not supported | Different screen size (dials are drawn for 454×454) |
+
+```bash
+make install DEVICE=fenix8pro47mm   # example for a fēnix 8 Pro
+```
+
+**Testing on a model you don't own:** run the simulator with that device, e.g. `make sim-submariner DEVICE=fenix8pro47mm` (download the device first in SDK Manager → Devices). Check both normal and low-power mode (*Settings > Low Power Mode*) before trusting it on a real watch.
+
+---
+
 ## The Watch Face Collections
 
 ### 1. Rolex Submariner Date (`apps/submariner/`)
@@ -64,13 +82,14 @@ The repository includes [`AGENTS.md`](AGENTS.md) and [`CLAUDE.md`](CLAUDE.md), g
 
 1. **Java Runtime (JDK 17 or 21):**
    ```bash
-   # macOS (Homebrew)
-   brew install openjdk@21
+   brew install openjdk@21            # macOS (Homebrew)
+   sudo apt install openjdk-21-jre    # Linux (Debian/Ubuntu)
    ```
 2. **Garmin Connect IQ SDK:**
    - Download the **Connect IQ SDK Manager**: [Garmin Developer Site](https://developer.garmin.com/connect-iq/sdk/)
    - Open SDK Manager and download the latest SDK.
-   - In SDK Manager under **Devices**, download the **fēnix® 8 47mm** (`fenix847mm`).
+   - In SDK Manager under **Devices**, download your watch model (e.g. **fēnix® 8 47mm / 51mm**, `fenix847mm`).
+   - The Makefile finds the active SDK automatically on macOS and Linux. If it doesn't, pass it explicitly: `make build SDK=/path/to/connectiq-sdk`.
 3. **Developer Key (`developer_key.der`):**
    - You need a 4096-bit RSA developer key to sign Connect IQ apps.
    - Run the included command to generate one instantly:
@@ -78,10 +97,13 @@ The repository includes [`AGENTS.md`](AGENTS.md) and [`CLAUDE.md`](CLAUDE.md), g
      make generate-key
      ```
      *(This creates `~/.garmin/developer_key.der`).*
-4. **MTP Transfer Tool (macOS):**
+4. **MTP Transfer Tool (`mtp-sendfile`):**
    ```bash
-   brew install libmtp
+   brew install libmtp                # macOS
+   sudo apt install mtp-tools         # Linux (Debian/Ubuntu)
+   sudo dnf install libmtp-examples   # Linux (Fedora)
    ```
+   *Linux:* if your desktop auto-mounts the watch (GNOME/KDE file manager), unmount it first or `mtp-sendfile` will report no device.
 
 ---
 
@@ -93,23 +115,23 @@ The repository includes [`AGENTS.md`](AGENTS.md) and [`CLAUDE.md`](CLAUDE.md), g
 3. **Important:** Make sure **Garmin Express is closed completely**; otherwise, it will lock the USB interface and prevent MTP file transfers.
 
 #### 2. Option A: One-Command Sideload (`make install`)
-Run:
+Run (add `DEVICE=...` if your watch is not the default, see [Supported Watches](#supported-watches)):
 ```bash
 make install
 ```
 This will:
 1. Verify Java, the Connect IQ compiler, and developer key.
 2. Compile both `bin/Submariner.prg` and `bin/RolexDaytona.prg`.
-3. Sideload both watch faces directly into `GARMIN/Apps/` on your watch via MTP.
+3. Sideload both watch faces directly into `GARMIN/Apps/` on your watch via MTP. If the transfer fails, `make` stops with an error instead of reporting success.
 
-#### 3. Option B: Manual Drag-and-Drop (OpenMTP or Android File Transfer)
-If you prefer a graphical tool or are on Windows/Linux:
+#### 3. Option B: Manual Drag-and-Drop
+If you prefer a graphical tool (OpenMTP on macOS, your file manager on Linux):
 1. Compile the binaries:
    ```bash
    make build
    ```
    *(Creates `bin/Submariner.prg` and `bin/RolexDaytona.prg`).*
-2. Open **OpenMTP** or **Android File Transfer**.
+2. Open **OpenMTP** (macOS) or your file manager (Linux, the watch shows up as an MTP device).
 3. Navigate to `GARMIN/Apps/` on the watch storage.
 4. Drag and drop `bin/Submariner.prg` and `bin/RolexDaytona.prg` into `GARMIN/Apps/`.
 
@@ -145,8 +167,11 @@ make clean             # Clean up compiled binaries
 
 ## Troubleshooting
 
-- **Error: `mtp-sendfile: Device or resource busy`:**
-  - Garmin Express or another MTP app is running in the background. Quit Garmin Express completely (`pkill -f "Garmin Express"`).
+- **Error: `mtp-sendfile: Device or resource busy` or `No devices`:**
+  - Garmin Express or another MTP app is running in the background. Quit Garmin Express completely (`pkill -f "Garmin Express"`). On Linux, unmount the watch in your file manager.
+  - The watch must be in MTP mode. If you just switched it to MTP, **power the watch off and on** and reconnect; the USB mode change only takes effect after a restart.
+- **Error: `Target device id '...' is not enabled in the application manifest file`:**
+  - That `DEVICE` is not supported yet. See [Supported Watches](#supported-watches).
 - **Error: `monkeyc not found`:**
   - Make sure you downloaded the SDK via Garmin Connect IQ SDK Manager and set it as the active SDK.
 - **Error: `Developer key not found`:**

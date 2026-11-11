@@ -70,10 +70,10 @@ Execute the following verification checks:
    ```bash
    java -version
    ```
-   *If missing (macOS):* Instruct the user or install via `brew install openjdk@21`.
+   *If missing:* macOS `brew install openjdk@21`; Linux `sudo apt install openjdk-21-jre`.
 
 2. **Garmin Connect IQ SDK:**
-   Verify `~/Library/Application Support/Garmin/ConnectIQ/current-sdk.cfg` exists.
+   Verify `current-sdk.cfg` exists: macOS `~/Library/Application Support/Garmin/ConnectIQ/`, Linux `~/.Garmin/ConnectIQ/`. Run `make check`.
    *If missing:* Direct the user to install the SDK and download the `fenix847mm` device target via Garmin's Connect IQ SDK Manager (`https://developer.garmin.com/connect-iq/sdk/`).
 
 3. **Developer Key (`developer_key.der`):**
@@ -88,7 +88,10 @@ Execute the following verification checks:
    ```bash
    which mtp-sendfile
    ```
-   *If missing (macOS):* Run `brew install libmtp`.
+   *If missing:* macOS `brew install libmtp`; Linux `sudo apt install mtp-tools` (Fedora: `libmtp-examples`).
+
+5. **Watch Model (`DEVICE`):**
+   Ask the user which watch they have and map it to a `DEVICE` (see README "Supported Watches"): `fenix847mm` (fēnix 8 47/51mm AMOLED, tactix 8, quatix 8, default) or `fenix8pro47mm` (fēnix 8 Pro). Other models are not supported; do not build for them.
 
 ### Phase 2: Pre-Sideload Checklist
 Before running the install command:
@@ -99,7 +102,7 @@ Before running the install command:
 2. **Watch Connection:** Ensure the Garmin fēnix 8 is connected via USB cable and set to **MTP Mode** (*Settings > System > Advanced > USB Mode > MTP*).
 
 ### Phase 3: Build & Sideload
-Compile and transfer both watch faces in one shot:
+Compile and transfer both watch faces in one shot (add `DEVICE=<id>` for non-default models):
 ```bash
 make install
 ```
@@ -109,11 +112,13 @@ make install
   make install-daytona     # Only Daytona
   ```
 
-*Folder Destination:* `mtp-sendfile` automatically places files into folder ID `16777227` (`GARMIN/Apps/`) on the watch.
+*Folder Destination:* files go to the `/GARMIN/Apps` path on the watch (override with `MTP_DIR=...`). The Makefile fails loudly if the folder or device is not found.
 
-*GUI Fallback:* If MTP command fails (e.g., USB permission denied or running on Windows/Linux without libmtp):
+*No device found:* if the watch is set to MTP but not detected, have the user power-cycle the watch and reconnect; the USB mode change only applies after a restart.
+
+*GUI Fallback:* If MTP command fails (e.g., USB permission denied or no libmtp):
 1. Run `make build` to generate the `.prg` files in `bin/`.
-2. Inform the user to open **OpenMTP** or **Android File Transfer** and drag `bin/Submariner.prg` and `bin/RolexDaytona.prg` into the `GARMIN/Apps/` folder on the watch storage.
+2. Inform the user to open **OpenMTP** (macOS) or their file manager (Linux) and drag `bin/Submariner.prg` and `bin/RolexDaytona.prg` into the `GARMIN/Apps/` folder on the watch storage.
 
 ### Phase 4: User Instructions
 Tell the user:
@@ -128,7 +133,7 @@ Tell the user:
 
 Each watch face under `apps/<name>/` is a fully self-contained Connect IQ application:
 
-- `manifest.xml`: Contains the unique App UUID, target device (`fenix847mm`), and permissions (such as `ComplicationSubscriber` for touch-to-glance navigation).
+- `manifest.xml`: Contains the unique App UUID, target devices (`fenix847mm`, `fenix8pro47mm`), and permissions (such as `ComplicationSubscriber` for touch-to-glance navigation).
 - `monkey.jungle`: Monkey C build jungle setting (`project.manifest = manifest.xml`).
 - `source/FaceApp.mc`: App lifecycle entry point; instantiates View and Delegate.
 - `source/FaceView.mc`: Core rendering engine:
