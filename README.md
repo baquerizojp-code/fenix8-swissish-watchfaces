@@ -156,4 +156,6 @@ make clean             # Clean up compiled binaries
 
 ## License & Disclaimer
 
-Personal project created for watch enthusiasm and technical experimentation on Garmin Connect IQ hardware. Not affiliated with, sponsored by, or endorsed by Rolex SA or Garmin Ltd.
+Released under the [MIT License](LICENSE). You are free to use, modify, and share it.
+
+Personal project created for watch enthusiasm and technical experimentation on Garmin Connect IQ hardware. Not affiliated with, sponsored by, or endorsed by Rolex SA or Garmin Ltd. Rolex, Submariner, Daytona, Garmin, and fēnix are trademarks of their respective owners; the MIT License covers this code only and grants no rights to those marks.
