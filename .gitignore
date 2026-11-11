@@ -1,0 +1,21 @@
+# Garmin Connect IQ Build Binaries
+bin/
+*.prg
+
+# Developer Credentials & Private Keys (NEVER commit)
+*.der
+*.pem
+
+# Private / Personal Watch Faces, Tools & Legacy Backups (Local only, not published to GitHub)
+apps/emelec/
+*emelec*
+legacy_backup/
+tools/
+Makefile.local
+
+# OS / Editor Artifacts
+.DS_Store
+Thumbs.db
+.vscode/settings.json
+*.swp
+*~

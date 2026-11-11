@@ -1,0 +1,6 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="DialPanda" filename="dial_daytona_panda.png" />
+    <bitmap id="DialBlack" filename="dial_daytona_black.png" />
+    <bitmap id="DialSpark" filename="dial_daytona_spark.png" />
+</drawables>

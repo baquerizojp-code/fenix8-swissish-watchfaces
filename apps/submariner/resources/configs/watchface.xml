@@ -1,0 +1,26 @@
+<resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <watchface-config>
+        <styles>
+            <style id="1" label="@Strings.StyleBlack" default="true"/>
+            <style id="2" label="@Strings.StyleGreen"/>
+            <style id="3" label="@Strings.StylePolar"/>
+            <style id="4" label="@Strings.StyleSparkBlack"/>
+            <style id="5" label="@Strings.StyleSparkOrange"/>
+        </styles>
+
+        <!-- Seconds Hand Accent Color -->
+        <accentColors>
+            <color label="@Strings.ColorOrange" default="true">0xF39520</color>
+            <color label="@Strings.ColorSteel">0xE0E0E0</color>
+            <color label="@Strings.ColorWhite">0xFFFFFF</color>
+            <color label="@Strings.ColorBlack">0x111111</color>
+        </accentColors>
+
+        <!-- Lume Fill Color -->
+        <dataColors>
+            <color label="@Strings.ColorWhite" default="true">0xFFFFFF</color>
+            <color label="@Strings.ColorChromalight">0xEEFFFF</color>
+            <color label="@Strings.ColorOrange">0xF39520</color>
+        </dataColors>
+    </watchface-config>
+</resources>

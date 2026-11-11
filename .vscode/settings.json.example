@@ -1,0 +1,4 @@
+{
+    "// Note": "Copy this file to settings.json and adjust paths for your system",
+    "monkeyC.developerKeyPath": "~/.garmin/developer_key.der"
+}

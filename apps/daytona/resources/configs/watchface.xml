@@ -1,0 +1,30 @@
+<resources xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://developer.garmin.com/downloads/connect-iq/resources.xsd">
+    <watchface-config>
+        <styles>
+            <style id="1" label="@Strings.StylePanda" default="true"/>
+            <style id="2" label="@Strings.StyleBlack"/>
+            <style id="3" label="@Strings.StyleSpark"/>
+        </styles>
+
+        <!-- Chronograph Second & Subdial Accent Color -->
+        <accentColors>
+            <color label="@Strings.ColorRed" default="true">0xE02020</color>
+            <color label="@Strings.ColorOrange">0xF39520</color>
+            <color label="@Strings.ColorSteel">0xE0E0E0</color>
+            <color label="@Strings.ColorWhite">0xFFFFFF</color>
+        </accentColors>
+
+        <!-- Lume Fill Color -->
+        <dataColors>
+            <color label="@Strings.ColorWhite" default="true">0xFFFFFF</color>
+            <color label="@Strings.ColorChromalight">0xEEFFFF</color>
+            <color label="@Strings.ColorOrange">0xF39520</color>
+        </dataColors>
+        <!-- 3 Daytona Subdial Complications (Fully customizable on-device!) -->
+        <data>
+            <complication id="1" allowAny="true"/>
+            <complication id="2" allowAny="true"/>
+            <complication id="3" allowAny="true"/>
+        </data>
+    </watchface-config>
+</resources>

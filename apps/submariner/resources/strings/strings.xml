@@ -1,0 +1,15 @@
+<strings>
+    <string id="AppName">Submariner</string>
+
+    <string id="StyleBlack">Submariner Date Black (116610LN)</string>
+    <string id="StyleGreen">Submariner Date Green (Hulk 116610LV)</string>
+    <string id="StylePolar">Submariner Date Polar White (Spark Edition)</string>
+    <string id="StyleSparkBlack">Submariner Date Stealth Black (Spark Edition)</string>
+    <string id="StyleSparkOrange">Submariner Date Full Spark Orange</string>
+
+    <string id="ColorOrange">Spark Orange (Garmin Match)</string>
+    <string id="ColorSteel">Steel / White Gold</string>
+    <string id="ColorWhite">Pure White</string>
+    <string id="ColorChromalight">Chromalight Ice Blue</string>
+    <string id="ColorBlack">Carbon Black</string>
+</strings>

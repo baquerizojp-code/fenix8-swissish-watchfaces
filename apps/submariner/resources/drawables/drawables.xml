@@ -1,0 +1,8 @@
+<drawables>
+    <bitmap id="LauncherIcon" filename="launcher_icon.png" />
+    <bitmap id="DialBlack" filename="dial_black.png" />
+    <bitmap id="DialGreen" filename="dial_green.png" />
+    <bitmap id="DialPolar" filename="dial_polar.png" />
+    <bitmap id="DialSparkBlack" filename="dial_spark_black.png" />
+    <bitmap id="DialSparkOrange" filename="dial_spark_orange.png" />
+</drawables>

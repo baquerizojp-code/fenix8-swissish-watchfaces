@@ -1,0 +1,13 @@
+<strings>
+    <string id="AppName">Rolex Daytona</string>
+    <string id="StylePanda">Daytona Panda (126500LN)</string>
+    <string id="StyleBlack">Daytona Classic Black (126500LN)</string>
+    <string id="StyleSpark">Daytona Spark Orange Racing</string>
+
+    <string id="ColorOrange">Spark Orange</string>
+    <string id="ColorRed">Race Red</string>
+    <string id="ColorSteel">Polished Steel</string>
+    <string id="ColorWhite">Pure White</string>
+
+    <string id="ColorChromalight">Chromalight Cyan</string>
+</strings>
