@@ -3,6 +3,7 @@
     <iq:application id="9e27ade869c648b2a2b41bbc84ad6640" type="watchface" name="@Strings.AppName" entry="FaceApp" launcherIcon="@Drawables.LauncherIcon" minApiLevel="5.1.0">
         <iq:products>
             <iq:product id="fenix847mm"/>
+            <iq:product id="fenix8pro47mm"/>
         </iq:products>
         <iq:permissions>
             <iq:uses-permission id="ComplicationSubscriber"/>
